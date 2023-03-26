@@ -21,6 +21,26 @@ body {
         background-color: #D5D5D5;
         width: 500px;
         height: 450px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        &__header {
+            h4 {
+                margin-bottom: 20px;
+            }
+        }
+        &__main {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        &__result {
+            img {
+                width: 200px;
+                height: 100px;
+            }
+        }
     }
     &__disk {
         display: flex;
@@ -76,4 +96,15 @@ body {
 #confirm {
     background-color: #00E380;
     margin-right: 20px;
+}
+
+.view {
+    display: flex;
+    &__screen {
+        background-color: #c1c1c1;
+        border: 1px solid #767676;
+        padding: 30px 20px;
+        margin: 5px;
+        font-size: 1.5rem;
+    }
 }
