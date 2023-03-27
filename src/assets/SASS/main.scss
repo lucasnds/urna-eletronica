@@ -108,3 +108,18 @@ body {
         font-size: 1.5rem;
     }
 }
+
+@media (max-width:965px) {
+    .container {
+        flex-direction: column;
+        &__results {
+            width: 435px;
+        }
+    }
+}
+
+@media (max-width:440px) {
+    .container__results {
+        width: 100%;
+    }
+}

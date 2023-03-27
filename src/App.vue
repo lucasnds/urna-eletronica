@@ -13,11 +13,11 @@
         </div>
         <br>
         <div class="container__results__main" v-for="(cantor, index) in this.cantores" :key="index">
-            <div>
-              <p v-if="numberVoto== cantor.number">Nome:{{cantor.name}}</p>
-              <p v-if="numberVoto== cantor.number">Gênero musical:{{cantor.style}}</p>
+            <div v-if="numberVoto == cantor.number">
+              <p>Nome:{{cantor.name}}</p>
+              <p>Gênero musical:{{cantor.style}}</p>
             </div>
-            <img v-if="numberVoto== cantor.number" :src="cantor.photo" alt="foto do cantor(a)">
+            <img v-if="numberVoto == cantor.number" :src="cantor.photo" alt="foto do cantor(a)">
         </div>
         
       </div>
@@ -45,16 +45,16 @@
         <div></div>
         <button class="container__disk__button" @click="addNumber(0)"> <span>0</span></button>
         <div></div>
-        <button class="operations" id="white">BRANCO</button>
+        <button class="operations" id="white" @click="whiteButton()">BRANCO</button>
         <button class="operations" id="correct" @click="resetNumber()">CORRIGIR</button>
-        <button class="operations" id="confirm">CONFIRMAR</button>
+        <button class="operations" id="confirm" @click="confirmButton()">CONFIRMAR</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-
+import confirmAudio from '@/assets/Audio/confirm.wav'
 
 export default {
   name: 'App',
@@ -90,6 +90,12 @@ export default {
                       name: "Voto nulo",
                       style: "Voto nulo",                                                                                                                                                   
                       number:'00'                                                
+                  },
+                  {
+                    photo: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAA1BMVEX///+nxBvIAAAASElEQVR4nO3BgQAAAADDoPlTX+AIVQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwDcaiAAFXD1ujAAAAAElFTkSuQmCC",
+                      name: "Voto branco",
+                      style: "Voto branco",
+                      number: '  '
                   }]
               
             }
@@ -100,24 +106,22 @@ export default {
                 return false
               }
               this.numberVoto += '' + number
-              this.verificNumber()
             },
             resetNumber(){
               this.numberVoto = ''
             },
-            verificNumber(){
-              if(this.numberVoto.length <2){
-                return false
+            whiteButton(){
+              this.numberVoto = '  '
+            },
+            confirmButton(){
+              if(this.numberVoto != ''){
+                var audio = new Audio(confirmAudio)
+                audio.play()
               }
-              if(this.numberVoto == '23'){
-                return true
-              }
-              this.candidato = {
-                name: 'voto nulo',
-                style: 'voto nulo',
-              }
-              
+              this.resetNumber()
             }
+
+          
           }
 }
 
